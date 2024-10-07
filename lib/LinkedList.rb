@@ -70,10 +70,30 @@ class LinkedList
     @tail.next_node = nil
     popped_node
   end
+
+  def contains?(value)
+    current_node = @head
+    while current_node != nil
+      return true if current_node.value == value
+      current_node = current_node.next_node
+    end
+    false
+  end
+
+  def find(value)
+    current_node = @head
+    current_index = 0
+    while current_node != nil
+      return current_index if current_node.value == value
+      current_node = current_node.next_node
+      current_index += 1
+    end
+    nil
+  end
 end
 
 list = LinkedList.new
 list.append(1)
 list.append(5)
 list.append(3)
-list.pop
+puts list.find(5)
