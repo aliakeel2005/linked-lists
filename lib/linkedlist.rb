@@ -1,4 +1,4 @@
-require_relative 'Node.rb'
+require_relative 'node'
 
 class LinkedList
   def initialize
@@ -43,8 +43,9 @@ class LinkedList
   def at(index)
     current_node = @head
     current_index = 0
-    while current_node != nil
+    until current_node.nil?
       return current_node.value if current_index == index
+
       current_node = current_node.next_node
       current_index += 1
     end
@@ -61,10 +62,9 @@ class LinkedList
       return popped_node
     else
       current_node = @head
-      while current_node.next_node != @tail
-        current_node = current_node.next_node
-      end
+      current_node = current_node.next_node while current_node.next_node != @tail
     end
+
     popped_node = @tail
     @tail = current_node
     @tail.next_node = nil
@@ -73,8 +73,9 @@ class LinkedList
 
   def contains?(value)
     current_node = @head
-    while current_node != nil
+    until current_node.nil?
       return true if current_node.value == value
+
       current_node = current_node.next_node
     end
     false
@@ -83,8 +84,9 @@ class LinkedList
   def find(value)
     current_node = @head
     current_index = 0
-    while current_node != nil
+    until current_node.nil?
       return current_index if current_node.value == value
+
       current_node = current_node.next_node
       current_index += 1
     end
@@ -95,11 +97,11 @@ class LinkedList
     string = ''
     current_node = @head
     current_index = 0
-    while current_node != nil
+    until current_node.nil?
       string += "(#{current_node.value}) -> "
       current_node = current_node.next_node
       current_index += 1
-      return string += "(#{current_node.value}) -> nil" if current_node.next_node == nil
+      return string += "(#{current_node.value}) -> nil" if current_node.next_node.nil?
     end
   end
 end
